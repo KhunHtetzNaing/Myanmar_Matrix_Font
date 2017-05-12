@@ -1,0 +1,288 @@
+﻿Version=6.8
+NumberOfModules=12
+Module1=Ab0ut
+Module2=Guide
+Module3=bList
+Module4=Samsung
+Module5=Oppo
+Module6=Huawei
+Module7=Vivo
+Module8=Vivo1False
+Module9=VivoGuide
+Module10=Starter
+Module11=Xiaomi
+Module12=Other
+Build1=Default,com.htetznaing.mmmatrixfont
+ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: https://www.b4x.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="5" android:targetSdkVersion="19"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~'End of default text.~\n~~\n~'************ Google Play Services Base ************~\n~AddApplicationText(~\n~   <activity android:name="com.google.android.gms.common.api.GoogleApiActivity"~\n~  android:theme="@android:style/Theme.Translucent.NoTitleBar"~\n~  android:exported="false"/>~\n~    <meta-data~\n~  android:name="com.google.android.gms.version"~\n~  android:value="@integer/google_play_services_version" />~\n~)~\n~~\n~'************ Google Play Services Base (end) ************~\n~~\n~'************ Firebase Ads ************~\n~AddApplicationText(~\n~  <activity~\n~  android:name="com.google.android.gms.ads.AdActivity"~\n~  android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"~\n~  android:theme="@android:style/Theme.Translucent" />~\n~  <activity android:name="com.google.android.gms.ads.purchase.InAppPurchaseActivity"~\n~  android:theme="@style/Theme.IAPTheme"/>~\n~)~\n~'************ Firebase Ads (end) ************
+IconFile=
+NumberOfFiles=12
+File1=about.png
+File2=data.zip
+File3=fb.png
+File4=Guide.html
+File5=icon.png
+File6=Matrix.apk
+File7=Matrix.hwt
+File8=Matrix.itz
+File9=matrix.ttf
+File10=Matrix.txj
+File11=MatrixO.apk
+File12=share.png
+NumberOfLibraries=9
+Library1=core
+Library2=animatetext
+Library3=firebaseadmob
+Library4=clipboard
+Library5=stringutils
+Library6=phone
+Library7=dialogs
+Library8=mlfiles
+Library9=abzipunzip
+@EndOfDesignText@
+#Region  Project Attributes 
+	#ApplicationLabel: Myanmar Matrix Font
+	#VersionCode: 1
+	#VersionName: 1.0
+	'SupportedOrientations possible values: unspecified, landscape or portrait.
+	#SupportedOrientations: portrait
+	#CanInstallToExternalStorage: False
+#End Region
+
+#Region  Activity Attributes 
+	#FullScreen: False
+	#IncludeTitle: False
+#End Region
+
+Sub Process_Globals
+	'These global variables will be declared once when the application starts.
+	'These variables can be accessed from all modules.
+
+End Sub
+
+Sub Globals
+	'These global variables will be redeclared each time the activity is created.
+	'These variables can only be accessed from this module.
+Dim tb As Label
+Dim share,About As Button 
+Dim sbg,abg As BitmapDrawable 
+
+Dim iv As ImageView
+Dim tt As Label
+Dim mm As Typeface : mm = mm.LoadFromAssets("matrix.ttf")
+Dim anitx As AnimateText
+
+Dim b1,b2,b3 As Button
+Dim b1bg,b2bg,b3bg As ColorDrawable
+Dim lf As Label
+
+Dim B As AdView
+Dim I As InterstitialAd
+End Sub
+
+Sub Activity_Create(FirstTime As Boolean)
+	Activity.Color = Colors.White
+	tb.Initialize("")
+	tb.Color = Colors.rgb(0, 150, 136)
+	tb.Text = "Myanmar Matrix Font"
+	tb.TextColor = Colors.White
+	tb.TextSize = 20
+	tb.Gravity = Gravity.CENTER
+	tb.Typeface = Typeface.DEFAULT_BOLD
+	Activity.AddView(tb,0%x,0%y,100%x,55dip)
+	
+	About.Initialize("about")
+	abg.Initialize(LoadBitmap(File.DirAssets,"about.png"))
+	About.Background = abg
+	About.Gravity = Gravity.FILL
+	Activity.AddView(About,10dip,12.5dip,30dip,30dip)
+	
+	share.Initialize("share")
+	sbg.Initialize(LoadBitmap(File.DirAssets,"share.png"))
+	share.Background = sbg
+	share.Gravity = Gravity.FILL
+	Activity.AddView(share,100%x-40dip,12.5dip,30dip,30dip)
+		
+	iv.Initialize("")
+	iv.Bitmap = LoadBitmap(File.DirAssets,"icon.png")
+	iv.Gravity = Gravity.FILL
+	Activity.AddView(iv,50%x - 42.5dip,55dip+5dip,95dip,100dip)
+	
+	tt.Initialize("")
+	tt.TextColor = Colors.Black
+	tt.TextSize = 16
+	tt.Gravity = Gravity.CENTER
+	tt.Typeface = mm
+	anitx.initialize("",Me,300)
+	anitx.Endable = True
+	anitx.Run("ျမန္မာ Matrix စာလုံးပုံစံ" &CRLF& "Myanmar Matrix Font",tt)
+	Activity.AddView(tt,0%x,iv.Top+iv.Height+5dip,100%x,50dip)
+	
+	b1bg.Initialize(Colors.rgb(33, 150, 243),15)
+	b1.Initialize("b1")
+	b1.Text = "ထည့္သြင္းမည္"
+	b1.Typeface = mm
+	b1.TextSize = 15
+	b1.Background = b1bg
+	Activity.AddView(b1,50%x-100dip,tt.Top+tt.Height+7dip,200dip,50dip)
+	
+	b2bg.Initialize(Colors.rgb(233, 30, 99),15)
+	b2.Initialize("b2")
+	b2.Text = "အသုံးျပုနည္း"
+	b2.TextSize = 15
+	b2.Typeface = mm
+	b2.Background = b2bg
+	Activity.AddView(b2,50%x-100dip,b1.Top+b1.Height+7dip,200dip,50dip)
+	
+	b3bg.Initialize(Colors.rgb(156, 39, 176),15)
+	b3.Initialize("b3")
+	b3.Text = "အျခား App မ်ားရယူရန္"
+	b3.TextSize = 15
+	b3.Typeface = mm
+	b3.Background = b3bg
+	Activity.AddView(b3,50%x-100dip,b2.Height+b2.Top+7dip,200dip,50dip)
+	
+	lf.Initialize("lf")
+	lf.Text = "Developed By Myanmar Android App"
+	lf.TextSize = 16
+	lf.Gravity = Gravity.CENTER
+	lf.TextColor = Colors.rgb(0, 150, 136)
+	
+	Dim h As Int
+	If GetDeviceLayoutValues.ApproximateScreenSize < 6 Then
+		If 100%x > 100%y Then h = 32dip Else h = 50dip
+	Else
+		h = 90dip
+	End If
+	Activity.AddView(lf,0%x,90%y-h,100%x,25dip)
+	
+	B.Initialize("B","ca-app-pub-4173348573252986/5011893350")
+	Dim height As Int
+	If GetDeviceLayoutValues.ApproximateScreenSize < 6 Then
+		If 100%x > 100%y Then height = 32dip Else height = 50dip
+	Else
+		height = 90dip
+	End If
+	Activity.AddView(B, 0dip, 100%y - height, 100%x, height)
+	B.LoadAd
+	Log(B)
+	
+	I.Initialize("I","ca-app-pub-4173348573252986/6488626550")
+	I.LoadAd
+End Sub
+
+Sub b1_Click
+	StartActivity(bList)
+	If I.Ready Then I.Show Else I.LoadAd
+End Sub
+
+Sub b2_Click
+	StartActivity(Guide)
+	If I.Ready Then I.Show Else I.LoadAd
+End Sub
+
+Sub b3_Click
+	Dim pb As PhoneIntents
+	StartActivity(pb.OpenBrowser("http://www.myanmarandroidapp.com/p/we-apps.html"))
+	If I.Ready Then I.Show Else I.LoadAd
+End Sub
+
+Sub Activity_Resume
+
+End Sub
+
+Sub Activity_Pause (UserClosed As Boolean)
+
+End Sub
+
+Sub Activity_KeyPress (KeyCode As Int) As Boolean
+	If KeyCode = KeyCodes.KEYCODE_BACK Then
+	Dim dialog As CustomDialog
+	Dim lb As Label
+	lb.Initialize(dialog)
+	lb.Typeface = mm
+	lb.TextSize = 16
+	lb.Text = "အသုံးဝင္ App မ်ားနွင့္"&CRLF&"ေန့စဥ္နည္းပညာသတင္းအခ်က္လက္မ်ားရယူဖို့"&CRLF&"Myanmar Android App ေပ့စ္ကို" &CRLF&"အခုပဲ Like လုပ္ထားလိုက္ပါ။"
+	dialog.AddView(lb, 20dip, 10dip, 100%x - 40dip, 20%y)
+	dialog.Show("Myanmar Android App", "Like", "Rate", "Share", LoadBitmap(File.DirAssets, "fb.png"))
+If dialog.Response = DialogResponse.POSITIVE Then
+		Try
+			Dim Facebook As Intent
+			Facebook.Initialize(Facebook.ACTION_VIEW, "fb://page/627699334104477")
+			StartActivity(Facebook)
+		Catch
+			Dim Facebook As Intent
+			Facebook.Initialize(Facebook.ACTION_VIEW, "https://m.facebook.com/MmFreeAndroidApps")
+			StartActivity(Facebook)
+		End Try
+			Return False
+	End If
+	
+	If dialog.Response = DialogResponse.CANCEL Then
+		Dim pb As PhoneIntents
+		StartActivity(pb.OpenBrowser("market://details?id=com.htetznaing.mmmatrixfont"))
+			Return False
+	End If
+	
+	If dialog.Response = DialogResponse.NEGATIVE Then
+		Dim ShareIt As Intent
+		Dim copy As BClipboard
+		copy.clrText
+		copy.setText("#MyanmarMatrixFont App! Beautiful Myanmar Zawgyi Font Style!	You can Use in Samung, Oppo,Vivo, Huawei (EMUI) and Xiaomi (MIUI) without Root Access!!!! Download Free at : http://www.MyanmarAndroidApp.com/search?q=Myanmar+Matrix+Font")
+		ShareIt.Initialize (ShareIt.ACTION_SEND,"")
+		ShareIt.SetType ("text/plain")
+		ShareIt.PutExtra ("android.intent.extra.TEXT",copy.getText)
+		ShareIt.PutExtra ("android.intent.extra.SUBJECT","Get Free!!")
+		ShareIt.WrapAsIntentChooser("Share App Via...")
+		StartActivity (ShareIt)
+			Return False
+	End If
+	End If
+End Sub
+
+'Banner Ads
+Sub B_FailedToReceiveAd (ErrorCode As String)
+	Log("B failed: " & ErrorCode)
+End Sub
+Sub B_ReceiveAd
+	Log("B received")
+End Sub
+
+Sub B_AdScreenDismissed
+	Log("B Dismissed")
+End Sub
+
+'Interstitial Ads
+Sub I_AdClosed
+	I.LoadAd
+End Sub
+
+Sub I_ReceiveAd
+	Log("I Received")
+End Sub
+
+Sub I_FailedToReceiveAd (ErrorCode As String)
+	Log("I not Received - " &"Error Code: "&ErrorCode)
+	I.LoadAd
+End Sub
+
+Sub I_adopened
+	Log("I Opened")
+	I.LoadAd
+End Sub
+
+Sub about_Click
+	StartActivity(Ab0ut)
+End Sub
+
+Sub share_Click
+	Dim ShareIt As Intent
+	Dim copy As BClipboard
+	copy.clrText
+	copy.setText("#MyanmarMatrixFont App! Beautiful Myanmar Zawgyi Font Style!	You can Use in Samung, Oppo,Vivo, Huawei (EMUI) and Xiaomi (MIUI) without Root Access!!!! Download Free at : http://www.MyanmarAndroidApp.com/search?q=Myanmar+Matrix+Font")
+	ShareIt.Initialize (ShareIt.ACTION_SEND,"")
+	ShareIt.SetType ("text/plain")
+	ShareIt.PutExtra ("android.intent.extra.TEXT",copy.getText)
+	ShareIt.PutExtra ("android.intent.extra.SUBJECT","Get Free!!")
+	ShareIt.WrapAsIntentChooser("Share App Via...")
+	StartActivity (ShareIt)
+End Sub
